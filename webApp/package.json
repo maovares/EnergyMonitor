@@ -1,0 +1,27 @@
+{
+  "name": "webApp",
+  "version": "0.0.1",
+  "description": "Basic energy minitor with  Arduino and AngularJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "author": "Alberto Tablada, Jeudrin Marchena, Anthony Durán, Marcos Rodríguez",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.13.4",
+    "body-parser": "~1.15.1",
+    "mongojs": "~2.4.0",
+    "angular-ui-router": "~0.3.1",
+    "bootstrap": "~3.3.6",
+    "angular": "~1.5.6"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "angular",
+    "arduino",
+    "energy",
+    "monitor"
+  ]
+}
