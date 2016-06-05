@@ -24,7 +24,12 @@
   app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
   //
-  app.get('/getEnergyData/:id',db.getEnergyData);
+  app.get('/getEnergyData/:id',function(req, res){
+    var id = req.params.id;
+    db.getEnergyData(id,function(err,docs){
+      res.json(docs);
+    });
+  });
   app.get('/postEnergyData/:id/:number', function(req, res){
     db.postEnergyData(req.params.id, req.params.number);
   });
