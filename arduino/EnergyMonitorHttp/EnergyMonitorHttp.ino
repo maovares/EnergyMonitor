@@ -30,10 +30,9 @@ EthernetClient client;
 
 ///////////////////////////////// EnergyMonitor
 EnergyMonitor emon1;
-
-
-
-
+String idEmon1 = "p1";
+String text = "";
+/////////////////////////////////
 
 void setup() {
   Serial.begin(9600);
@@ -56,29 +55,34 @@ void setup() {
 
 void resetEthernet() {
  client.stop();
- Ethernet.begin(mac);
+ //Ethernet.begin(mac);
 }
 
 void loop() {
   
   double Irms = emon1.calcIrms(1480); 
-  Serial.println(Irms); // Irms
+  //Serial.println(Irms); // Irms
+  static char strIrms[15];  
+  dtostrf(Irms, 7, 4, strIrms);
+  String str(strIrms);
+  text = str.substring(1,str.length()-1);
+  Serial.println(str);
   
 
   if (client.connect(server, 8080)) {
-
     
-    client.println("GET /postEnergyData/p1/1 HTTP/1.1");
+    client.println("GET /postEnergyData/"+idEmon1+"/"+text+" HTTP/1.1");
     client.println("Connection: close");
     client.println();
     
-    //Serial.println("Http OK");
+    
+    //Serial.println("GET /postEnergyData/"+idEmon1+"/"+text+" HTTP/1.1");
   } 
   else {
     Serial.println("connection failed");
   }
   
   resetEthernet();
-  delay(1000);
+  //delay(1000);
 }
 
