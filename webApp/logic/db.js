@@ -8,10 +8,9 @@ var dbName = "energy";
 var mongojs = require("mongojs");
 var db = mongojs(dbName,['consumption']);
 
-exports.getEnergyData = function(id){
-	var id = params.id;
+exports.getEnergyData = function(id, callback){	
   db.consumption.find({'id':id},function(error, docs){
-    return docs;
+    callback(error,docs);
   });
 };
 
