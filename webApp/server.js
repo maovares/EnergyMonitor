@@ -25,7 +25,9 @@
 
   //
   app.get('/getEnergyData/:id',db.getEnergyData);
-  app.get('/postEnergyData/:id/:number', db.postEnergyData);
+  app.get('/postEnergyData/:id/:number', function(req, res){
+    db.postEnergyData(req.params.id, req.params.number);
+  });
 
 
   //
