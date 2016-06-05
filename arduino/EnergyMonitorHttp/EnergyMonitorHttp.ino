@@ -67,12 +67,12 @@ void loop() {
 
   if (client.connect(server, 8080)) {
 
-    /*  
+    
     client.println("GET /postEnergyData/p1/1 HTTP/1.1");
     client.println("Connection: close");
     client.println();
-    */
-    Serial.println("Http OK");
+    
+    //Serial.println("Http OK");
   } 
   else {
     Serial.println("connection failed");
