@@ -31,8 +31,6 @@ EthernetClient client;
 ///////////////////////////////// EnergyMonitor
 EnergyMonitor emon1;
 String idEmon1 = "p1";
-String text = "";
-String textWatts = "";
 /////////////////////////////////
 
 void setup() {
@@ -47,9 +45,13 @@ void setup() {
   }
   
   ///////////////////////////////// EnergyMonitor
-  emon1.voltage(2, 234.26, 1.7);
-  emon1.current(1, 60.606); // Configuración: entrada Pin Analógico, calibracion. 
+  Serial.begin(9600);
   
+  //emon1.voltage(2, 234.26, 1.7);  // Voltage: input pin, calibration, phase_shift
+  //emon1.current(1, 111.1);       // Current: input pin, calibration.
+  
+  emon1.voltage(4, 234.26, 1.7);
+  emon1.current(5, 28);             // Current: input pin, calibration.
   delay(1000);
   
 }
@@ -59,39 +61,52 @@ void resetEthernet() {
  //Ethernet.begin(mac);
 }
 
+
+String toStr(double num){
+  static char str[15];  
+  dtostrf(num, 12,3, str);
+  String text(str);
+  text = text.substring(1,text.length()-1);
+  text.replace(" ", "");
+  return text;
+}
+
+String toStr(float num){
+  static char str[15];  
+  dtostrf(num, 12,3, str);
+  String text(str);
+  text = text.substring(1,text.length()-1);
+  text.replace(" ", "");
+  return text;
+}
+
 void loop() {
-  
-  float Irms = emon1.calcIrms(1480); 
-  float irmsWatts = Irms * 120;
-  //Serial.println(Irms); // Irms
-  static char strIrms[15];  
-  dtostrf(Irms, 7, 4, strIrms);
-  String str(strIrms);
-  text = str.substring(1,str.length()-1);
-  //Serial.println(str);
-  
-  static char strIrmsWatts[15];  
-  dtostrf(irmsWatts, 7, 4, strIrmsWatts);
-  String strWatts(strIrmsWatts);
-  textWatts = strWatts.substring(1,strWatts.length()-1);
  
-  Serial.println("Amps: " + text + " | Watts: " textWatts);
+  double Irms = emon1.calcIrms(1480);  // Calculate Irms only 1480
+  emon1.calcVI(20,2000); // Voltage
   
+  float realPower       = emon1.realPower;        //extract Real Power into variable
+  float apparentPower   = emon1.apparentPower;    //extract Apparent Power into variable
+  float powerFactor     = emon1.powerFactor;      //extract Power Factor into Variable
+  float supplyVoltage   = emon1.Vrms;             //extract Vrms into Variable
+  double Watt = Irms*supplyVoltage;
+  
+  Serial.println("Watt: "+ toStr(Watt)+" Irms: "+toStr(Irms)+" supplyVoltage: "+toStr(supplyVoltage)+" realPower: "+toStr(realPower)+" apparentPower: "+toStr(apparentPower));
+ 
 
   if (client.connect(server, 8080)) {
     
-    client.println("GET /postEnergyData/"+idEmon1+"/"+text+"/"+textWatts+" HTTP/1.1");
+      client.println("GET /postEnergyData/"+idEmon1+"/"+toStr(Watt)+"/"+toStr(Irms)+"/"+toStr(supplyVoltage)+"/"+toStr(realPower)+"/"+toStr(apparentPower)+" HTTP/1.1");
     client.println("Connection: close");
     client.println();
     
-    
-    //Serial.println("GET /postEnergyData/"+idEmon1+"/"+text+" HTTP/1.1");
   } 
   else {
     Serial.println("connection failed");
   }
-  
-  resetEthernet();
-  //delay(1000);
+
+  Serial.println("------------------------ ");       // Printed all
+  resetEthernet(); 
+  // delay(3000);
 }
 
