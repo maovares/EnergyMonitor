@@ -1,9 +1,24 @@
 <div>
   <h3>Medición de energía</h3>
-  Numero de mediciones : {{monitor.measuresNumber}}
+
+  <br>
+  Promedio watts: {{monitor.averageWatts}}
+  <br>
+  Promedio Irms: {{monitor.averageIrms}}
+  <br>
+  Promedio voltaje: {{monitor.averageSupplyVoltage}}
+  <br>
+  Promedio Real power: {{monitor.averageRealPower}}
+  <br>
+  Promedio Apparent power: {{monitor.averageApparentPower}}
+  <br>
+  <br>
+  <br>
   <ul>
     <li ng-repeat = "measure in monitor.measures">
-      ID: {{measure.id}} || Amps: {{measure.amps}} || Watts: {{measure.watts}}
+      ID: {{measure.id}} || Watts: {{measure.watts}} || Irms: {{measure.irms}}
+      || Supply voltage: {{measure.supplyVoltage}} || Real power: {{measure.realPower}}
+      || Apparent power: {{measure.apparentPower}}
     </li>
   <ul>
 

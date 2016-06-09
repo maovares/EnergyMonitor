@@ -30,8 +30,14 @@
       res.json(docs);
     });
   });
-  app.get('/postEnergyData/:id/:amps/:watts', function(req, res){
-    db.postEnergyData(req.params.id, req.params.amps, req.params.watts);
+  app.get('/postEnergyData/:id/:watts/:irms/:supplyVoltage/:realPower/:apparentPower', function(req, res){
+    var id = req.params.id;
+    var watts = req.params.watts;
+    var irms = req.params.irms;
+    var supplyVoltage = req.params.supplyVoltage;
+    var realPower = req.params.realPower;
+    var apparentPower = req.params.apparentPower;
+    db.postEnergyData(id, watts, irms,supplyVoltage,realPower,apparentPower);
   });
 
 
