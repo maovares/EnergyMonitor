@@ -24,14 +24,15 @@
 
 //////////////////////////////////  Ethernet
 byte mac[] = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-char server[] = "192.168.1.14";
-IPAddress ip(192, 168, 1, 15);
+char server[] = "172.24.2.95";
+IPAddress ip(172, 24, 2, 250);
 EthernetClient client;
 
 ///////////////////////////////// EnergyMonitor
 EnergyMonitor emon1;
 String idEmon1 = "p1";
 String text = "";
+String textWatts = "";
 /////////////////////////////////
 
 void setup() {
@@ -60,18 +61,26 @@ void resetEthernet() {
 
 void loop() {
   
-  double Irms = emon1.calcIrms(1480); 
+  float Irms = emon1.calcIrms(1480); 
+  float irmsWatts = Irms * 120;
   //Serial.println(Irms); // Irms
   static char strIrms[15];  
   dtostrf(Irms, 7, 4, strIrms);
   String str(strIrms);
   text = str.substring(1,str.length()-1);
-  Serial.println(str);
+  //Serial.println(str);
+  
+  static char strIrmsWatts[15];  
+  dtostrf(irmsWatts, 7, 4, strIrmsWatts);
+  String strWatts(strIrmsWatts);
+  textWatts = strWatts.substring(1,strWatts.length()-1);
+ 
+  Serial.println("Amps: " + text + " | Watts: " textWatts);
   
 
   if (client.connect(server, 8080)) {
     
-    client.println("GET /postEnergyData/"+idEmon1+"/"+text+" HTTP/1.1");
+    client.println("GET /postEnergyData/"+idEmon1+"/"+text+"/"+textWatts+" HTTP/1.1");
     client.println("Connection: close");
     client.println();
     

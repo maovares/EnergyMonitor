@@ -1,3 +1,11 @@
-<div ng-controller="MonitorController">
-  Monitor
+<div>
+  <h3>Medición de energía</h3>
+  Numero de mediciones : {{monitor.measuresNumber}}
+  <ul>
+    <li ng-repeat = "measure in monitor.measures">
+      ID: {{measure.id}} || Amps: {{measure.amps}} || Watts: {{measure.watts}}
+    </li>
+  <ul>
+
+
 </div>

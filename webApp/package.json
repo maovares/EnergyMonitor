@@ -1,7 +1,7 @@
 {
   "name": "webApp",
   "version": "0.0.1",
-  "description": "Basic energy minitor with  Arduino and AngularJS",
+  "description": "Basic energy monitor with Arduino and AngularJS",
   "main": "server.js",
   "scripts": {
     "test": "test",

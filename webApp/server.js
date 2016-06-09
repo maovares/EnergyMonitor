@@ -30,8 +30,8 @@
       res.json(docs);
     });
   });
-  app.get('/postEnergyData/:id/:number', function(req, res){
-    db.postEnergyData(req.params.id, req.params.number);
+  app.get('/postEnergyData/:id/:amps/:watts', function(req, res){
+    db.postEnergyData(req.params.id, req.params.amps, req.params.watts);
   });
 
 

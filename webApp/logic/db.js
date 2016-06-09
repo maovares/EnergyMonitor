@@ -14,12 +14,13 @@ exports.getEnergyData = function(id, callback){
   });
 };
 
-exports.postEnergyData = function(id, number){
+exports.postEnergyData = function(id, amps, watts){
 
-	console.log(id+" "+number);
+	console.log(id+" "+amps + " " + watts);
 
   db.consumption.insert({
     "id":id,
-    "number":number
+    "amps":amps,
+    "watts":watts
   });
 };
