@@ -1,0 +1,28 @@
+{
+  "name": "webApp",
+  "version": "0.0.1",
+  "description": "Basic energy monitor with Arduino and AngularJS",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "author": "Alberto Tablada, Jeudrin Marchena, Antony Durán, Marcos Rodríguez",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "angular": "~1.5.6",
+    "angular-ui-router": "~0.3.1",
+    "body-parser": "~1.15.1",
+    "bootstrap": "~3.3.6",
+    "express": "~4.13.4",
+    "mongojs": "~2.4.0",
+    "n3-charts": "^2.0.27"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "angular",
+    "arduino",
+    "energy",
+    "monitor"
+  ]
+}
