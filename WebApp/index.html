@@ -1,0 +1,33 @@
+<html ng-app="energyApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Energy Monitor</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/resources/saveEnergy.png" />
+  <link rel="stylesheet" type="text/css" href="/styles/bootstrap.css" />
+  <link rel="stylesheet" href="/styles/LineChart.css">
+
+</head>
+
+<body>
+  <div ui-view>
+    Loading...
+  </div>
+  <script src="/scripts/d3.min.js"></script>
+  <script src="/scripts/angular.js"></script>
+  <script src="/scripts/angular-ui-router.js"></script>
+  <script src="/scripts/LineChart.js"></script>
+
+  <script src="app.js"></script>
+  <script src="/common/httpService.js"></script>
+  <script src="/monitor/monitor.controller.js"></script>
+  <script src="/monitor/monitor.service.js"></script>
+
+
+  <script src="/common/httpService.js"></script>
+
+</body>
+
+
+</html>

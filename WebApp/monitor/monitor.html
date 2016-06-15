@@ -1,0 +1,40 @@
+<div align="center">
+  <h1 class="modal-header">Energy Monitor</h1>
+  <br>
+    <div>
+        <h3 class="page-header">Watts</h3>
+        <h4 > <small>Average: {{monitor.averageWatts}}</small> </h4>
+        <div class="my-chart">
+            <linechart data="monitor.data" options="monitor.watts_options"></linechart>
+        </div>
+    </div>
+    <br>
+    <div>
+        <h3 class="page-header">Irms</h3>
+        <h4 > <small>Average: {{monitor.averageIrms}}</small> </h4>
+        <div class="my-chart">
+            <linechart data="monitor.data" options="monitor.irms_options"></linechart>
+        </div>
+    </div>
+    <br>
+    <div>
+        <h3 class="page-header">Supply Voltage</h3>
+        <h4 > <small>Average: {{monitor.averageSupplyVoltage}}</small> </h4>
+        <div class="my-chart">
+            <linechart data="monitor.data" options="monitor.supplyVoltage_options"></linechart>
+        </div>
+    </div>
+    <br>
+    <div>
+        <h3 class="page-header">Power Comparison</h3>
+        <h4 > <small>Real Power average {{monitor.averageRealPower}} <br> Apparent Power average {{monitor.averageApparentPower}} </small> </h4>
+
+        <div class="my-chart">
+            <linechart data="monitor.data" options="monitor.power_comparison_options"></linechart>
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+</div>
